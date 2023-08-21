@@ -1,17 +1,20 @@
 require('dotenv').config();
 const express = require('express');
+const { Router } = require('express');
+const serverless = require('serverless-http');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const Post = require('./models/Post');
 
 const app = express();
+const router = Router();
 const port = 5000
 
 //Middleware 
 app.use(express.json());
 //Enable to send x-www-form-urlencoded via postman
 // app.use(express.urlencoded({extended: false}))
-
+app.use('/api/', router);
 
 mongoose.
 connect(process.env.MONGO)
@@ -84,3 +87,7 @@ app.get('/api/users', async (req, res) => {
         res.status(500).json({message: error.message});
     }
   });
+
+
+
+module.exports.handler = serverless(app);
