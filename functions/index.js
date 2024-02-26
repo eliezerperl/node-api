@@ -4,8 +4,8 @@ const serverless = require('serverless-http');
 const { Router } = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const User = require('./models/User');
-const Post = require('./models/Post');
+const User = require('../models/User');
+const Post = require('../models/Post');
 
 const app = express();
 const router = Router();
